@@ -1,0 +1,14 @@
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {1}Introducción}{2}{section.1}%
+\contentsline {section}{\numberline {2}Conferencias Macy}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Primera conferencia}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Segunda conferencia}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Tercera conferencia}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Cuarta conferencia}{6}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Quinta conferencia}{6}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Sexta conferencia}{7}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Séptima conferencia}{7}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Octava conferencia}{8}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}Novena conferencia}{9}{subsection.2.9}%
+\contentsline {subsection}{\numberline {2.10}Décima conferencia}{10}{subsection.2.10}%
+\contentsline {section}{Referencias}{11}{section*.2}%

@@ -1,0 +1,321 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\decimalpoint
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{fancyhdr}
+\usepackage[inline]{enumitem}
+\usepackage{float}
+\usepackage{cancel}
+\usepackage{bigints}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{listingsutf8}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{apacite}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{tipa}
+\usepackage{caption} 
+\pagestyle{fancy}
+\usepackage{hyperref}
+\usepackage{mathtools}% http://ctan.org/pkg/mathtools
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\newcommand{\xvdash}[1]{%
+	\vdash^{\mkern-10mu\scriptscriptstyle\rule[-.9ex]{0pt}{0pt}#1}%
+}
+\setlength{\headheight}{15pt} 
+\lhead{Tarea .- Conferencias Macy}
+\rhead{\thepage}
+\lfoot{ESCOM-IPN}
+\renewcommand{\footrulewidth}{0.5pt}
+\setlength{\parskip}{0.5em}
+\newcommand{\ve}[1]{\overrightarrow{#1}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\lvert}
+\newcommand{\blank}{\text{\textcrb}}
+\date{\today}
+\title{ECA regla 30}
+\author{Sanchez Mendez Edmundo Josue}
+
+\lstdefinestyle{customc}{
+	belowcaptionskip=1\baselineskip,
+	breaklines=true,
+	frame=L,
+	xleftmargin=\parindent,
+	language=C++,
+	showstringspaces=false,
+	basicstyle=\ttfamily,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	numbers=left,
+	stringstyle=\color{orange},
+}
+
+\lstset{escapechar=@,style=customc,tabsize=3,language=C++}
+
+\bibliographystyle{apacite}
+\begin{document}
+		\begin{titlepage}
+			\begin{center}
+				
+				% Upper part of the page. The '~' is needed because \\
+				% only works if a paragraph has started.
+				
+				\noindent
+				\begin{minipage}{0.5\textwidth}
+					\begin{flushleft} \large
+						\includegraphics[width=0.5\textwidth]{resources/ipn.png}
+					\end{flushleft}
+				\end{minipage}%
+				\begin{minipage}{0.55\textwidth}
+					\begin{flushright} \large
+						\includegraphics[width=0.5\textwidth]{resources/escom.png}
+					\end{flushright}
+				\end{minipage}
+				
+				\textsc{\LARGE Instituto Politécnico Nacional}\\[0.5cm]
+				
+				\textsc{\Large Escuela Superior de Cómputo}\\[1cm]
+				
+				% Title
+				
+				{ \huge Tarea .- Conferencias Macy  \\[1cm] }
+				
+				{ \Large Unidad de aprendizaje: Computing Selected Topics} \\[1cm]
+				
+				{ \Large Grupo: 3CM19 } \\[1cm]
+				
+				\noindent
+				\begin{minipage}{0.5\textwidth}
+					\begin{flushleft} \large
+						\emph{Alumno:} \\
+						Sanchez Mendez Edmundo Josue
+					\end{flushleft}
+				\end{minipage}%
+				\begin{minipage}{0.5\textwidth}
+					\begin{flushright} \large
+						\emph{Profesor:} \\
+						Juarez Martinez Genaro
+					\end{flushright}
+				\end{minipage}
+				
+				\vfill
+				% Bottom of the page
+				{\large {\today}}
+			\end{center}
+		\end{titlepage}
+	
+	\titlepage
+	\tableofcontents
+	\newpage
+	
+	\section{Introducción}
+		Las Conferencias Macy fueron una serie de reuniones de académicos eminentes de diversas disciplinas, celebradas en Nueva York bajo la dirección de Frank Fremont-Smith y la Fundación Josiah MacyJr de 1946 a 1953 con una duración de dos días completos, en los cuales se presentaría trabajos, sin embargo, las conferencias giraron principalmente en torno a conversaciones y debates. Fue uno de los primeros eventos organizados juntando varias disciplinas, con el objetivo de generar avances en la teoría de sistemas, la cibernética, entre otras ramas y como podría resultar evidente restaurar la unidad de la ciencia. Entre los asistentes a dichas conferencias están algunos de los fundadores de la era computacional tales como John von Neumann y Claude Shannon.\par
+Muchas de las discusiones que sucedieron en dichas conferencias se convirtieron después en ramas de estudio científico y funcionaron como bases para dichas disciplinas. 
+	
+	\section{Conferencias Macy}
+		Así se pusieron en marcha las 'Conferencias Macy' se llevaron a cabo un total de 10 conferencias desde 1946 hasta 1953. Las primeras nueve se llevaron a cabo en el Hotel Beekman en la ciudad de Nueva York, y la décima se llevó a cabo en Princeton, Nueva Jersey. Para este trabajo en cada conferencia podemos encontrar los siguientes datos:
+		 \begin{itemize}
+    		\item Fecha en la que sucedió la conferencia.
+		 	 \item Problemas principales que se plantearon.
+		  	\item Principales investigadores que fueron participes de la conferencia.
+		\end{itemize}\par
+		\subsection{Primera conferencia}
+		Esta primer conferencia se llevo acabo los días 21 y 22 de Marzo del año 1946 en New York como titulo ``Feedback Mechanisms and Circular Causal Systems in Biological and Social Systems.'' o traducido al español ``Mecanismos de retroalimentación y sistemas causales circulares en sistemas biológicos y sociales.'' en la cual asistieron los siguientes personajes:
+		\begin{itemize}
+    		\item Gregory Bateson: Antropólogo. 
+    		\item Julian Bigelow: Ingeniero eléctrico.
+    		\item Gerhardt von Bonin: Neuroanatomía.
+    		\item Lawrence K. Frank: Ciencia social.
+    		\item Frank Fremont-Smith: Medicina.
+    		\item Ralph W. Gerard: Neurofisiología.
+    		\item Molly Harrower: Psicología.
+    		\item George Evelyn Hutchinson: Ecología.
+    		\item Heinrich Klüver: Psicología.
+    		\item Lawrence S. Kubie: Psiquiatría.
+    		\item Paul Lazarsfeld: Sociología.
+    		\item Kurt Lewin: Psicología.
+    		\item Rafael Lorente de Nó: Neurofisiología.
+    		\item Warren McCulloch: Neuropsiquiatría.
+    		\item Margaret Mead: Antropología.
+    		\item John von Neumann: Matemáticas.
+    		\item Filmer S. C. Northrop: Filosofía.
+    		\item Walter Pitts: Matemáticas.
+    		\item Arturo Rosenblueth: Fisiología.
+    		\item Leonard J. Savage: Matemáticas.
+    		\item Norbert Wiener: Matemáticas.
+			\item Invitado: Frederick Bremer: Neurofisiología.
+		\end{itemize}
+		En la sesión de apertura de la conferencia, von Neumann y Lorente de Nó \textbf{presentaron descripciones detalladas del estado del arte en computadoras digitales y neurofisiología}, respectivamente. En la segunda sesión de la conferencia, Wiener \textbf{presentó una descripción general de los mecanismos automáticos de autorregulación}. Rosenblueth luego \textbf{describió el comportamiento intencional y los mecanismos teleológicos} en su presentación de 1942.\par
+		McCulloch ofrece una presentación sobre \textbf{cómo las redes neuronales simuladas pueden emular el cálculo de la lógica proposicional}. También llama la atención sobre la comunicación como una metáfora descriptiva y señala las diferencias entre las descripciones de la mecánica de los mensajes y el contenido o significado del mensaje. Sugiere que la memoria puede ser una función de impulsos cíclicos continuos en una red neuronal.\par
+		Bateson hace una presentación que describe la \textbf{necesidad de una teoría sólida en las ciencias sociales}, ilustrando sus puntos con observaciones de su trabajo de campo antropológico de la década de 1930. Distingue entre $"$aprender$"$ y $"$aprender a aprender$"$, luego desafía al grupo preguntando si las computadoras podrían lograr una u otra forma de aprendizaje y cómo.\par
+		Wiener y von Neumann, en particular, afirman que sus teorías y modelos serían de utilidad en economía y ciencias políticas. Ningún académico-representante de la economía o las ciencias políticas asistirá a ninguna de las diez conferencias.\par
+		Gerard comenta que \textbf{las operaciones del cerebro son mucho más $"$analógicas$"$ que $"$digitales$"$}. Esto establece una división de conceptos entre 'analógico' y 'digital' que se convertiría en un tema recurrente de debate a lo largo de las conferencias. Algunos (especialmente los matemáticos como von Neumann) estarían enfatizando las perspectivas $"$digitales$"$, mientras que otros (especialmente los psicólogos) estarían enfatizando una orientación más $"$analógica$"$.\par						Heinrich Klüver da una presentación sobre \textbf{cómo la percepción de objetos parece utilizar mecanismos de retroalimentación para imponer la constancia}. Él declara que la psicología carece de un buen modelo que explique cómo un cerebro maneja la percepción de formas (Gestalten), planteando un tema que se abordaría repetidamente en las próximas conferencias.\par
+		Lawrence Frank sugiere que \textbf{los conceptos interdisciplinarios centrales de la conferencia solo podrían elaborarse y desarrollarse con la ayuda de un lenguaje más general que los léxicos disciplinarios de la época}. Esta alusión a la necesidad de un 'metalenguaje' se repetirá una y otra vez a lo largo de la serie de conferencias. Fremont-Smith abriría cada conferencia con un recordatorio de que era necesario establecer un nuevo léxico o lenguaje para las nuevas ideas que se discutían.\par
+		La psicóloga Molly Harrower ofrece una presentación sobre \textbf{las diferencias de percepción entre personas normales y personas con daño cerebral}.\par
+		El psiquiatra Lawrence Kubie da una presentación sobre \textbf{la neurosis, enfatizando los comportamientos repetitivos compulsivos en la neurosis}. Las alusiones descriptivas de Kubie a la $"$energía$"$ provocaron mucha discusión. Esta discusión (a menudo crítica y animada) sobre temas y modelos psiquiátricos se repetirá a lo largo de la serie de conferencias. Kubie, en particular, demostraría una notable persistencia y paciencia al hacer presentaciones regulares sobre temas psicoanalíticos que invitarían a las críticas de los $"$científicos duros$"$ como Pitts.\par
+		Northrop, el único filósofo del grupo principal, ofrece una presentación sobre \textbf{filosofía de la ciencia}. Él plantea la noción de una ética derivable de la ciencia y recomienda que se preste atención a la generación de una teoría normativa válida basada en principios científicos y evidencia. Él percibe una falta de interés en estos temas filosóficos entre sus compañeros de grupo, y rara vez habla después de esta primera conferencia. La apariencia de Northrop ilustra tres cosas. Primero, no todas las contribuciones de los participantes fueron tratadas con igual interés por el grupo en general. En segundo lugar, no todos los miembros del grupo principal contribuyeron activamente con presentaciones a lo largo de la serie de conferencias. En tercer lugar, aunque algunos tratarían las conferencias Macy como $"$filosóficas$"$ y como un $"$ejercicio de metaciencia$"$, la experiencia de Northrop parecería indicar que ninguno de estos temas tocó la fibra sensible del público en general.\par
+		\subsection{Segunda conferencia}
+		Esta segunda conferencia se llevo acabo los días 17 y 18 de Octubre del año 1946 en New York como titulo ``Teleological Mechanisms and Circular Causal Systems.'' o traducido al español ``Mecanismos teleológicos y sistemas causales circulares.'' en la cual asistieron los mismos personajes que participaron en la primer conferencia a excepción del personaje invitado y se incorporaron los siguientes personajes:
+		\begin{itemize}
+    		\item Henry Brosin: Psiquiatría.
+    		\item Donald G. Marquis: Psicólogo.
+    		\item T.C. Schneirla: Psicólogo animal.
+			\item Invitado: William Livingston: Medicina.
+		\end{itemize}
+ 		Como resultado de la sugerencia de Lazarsfeld en la primera conferencia, la Fundación Macy hizo que Gregory Bateson organizara una $"$conferencia especial$"$ o $"$subconferencia sociológica$"$  celebrada en septiembre. El título de este encuentro fue 'Mecanismos teleológicos en la sociedad'. Fue diseñado para permitir a los científicos sociales reunirse con Wiener y von Neumann, escuchar sus ideas y discutir cómo estas ideas podrían ser valiosas en las ciencias sociales.\par
+		La conferencia retoma la aclaración de los términos 'campo' y 'Gestalt' (conocido como también psicología de la forma o psicología de la configuración). El resultado principal de esta discusión es una ilustración de lo poco que los asistentes estuvieron de acuerdo con las definiciones e implicaciones de estas etiquetas. Terminan aplazando la discusión hasta que el psicólogo gestáltico Wolfgang Köhler pueda dirigirse a la conferencia.\par
+		Se le pide a Molly Harrower que explique el término $"$campo$"$ pero ella objeta al señalar que las ideas de su mentor Koffka difieren de las de Köhler.\par
+ 		Kurt Lewin ofrece una extensa presentación sobre su versión personal de $"$campo$"$ y otros conceptos de la psicología Gestalt y la psicología social.\par
+ 		Schneirla (un psicólogo comparado, es decir, un 'etólogo') hace una presentación sobre\textbf{ las comunicaciones táctiles y químicas dentro de una sociedad de hormigas armadas}. Esta es una de las raras ocasiones en las que los problemas psicológicos o de comportamiento se contextualizaron en términos de un colectivo (en contraste con los individuos).\par
+		Lawrence Frank organiza una conferencia separada sobre \textbf{mecanismos teleológicos} realizada bajo los auspicios de la Academia de Ciencias de Nueva York y celebrada en Nueva York inmediatamente después de la Segunda Conferencia Macy. De los asistentes a Macy, Frank elige a los oradores destacados Wiener, McCulloch, Hutchinson y Livingston. Por lo tanto, la segunda conferencia debe verse como el evento central de un trío de reuniones. La 'subconferencia sociológica' anterior y esta última conferencia sirven para ampliar la audiencia de los temas centrales de las Conferencias Macy fuera del contexto de la conferencia principal en sí.\par
+		\subsection{Tercera conferencia}
+		Esta tercera conferencia se llevo acabo los días 13 y 14 de Marzo del año 1947 en New York y lleva como titulo el mismo que la conferencia pasada, algo importante a mencionar que ahora el grupo principal es la suma de los personajes asistentes a la primera y segunda conferencia a excepción de los invitados, finalmente mencionar que Kurt Lewin muere poco antes de que esta conferencia se celebre, para ser exactos fallece el 12 de Febrero. En esta conferencia los invitados fueron los siguientes:
+		\begin{itemize}
+    		\item Nathan Ackerman: Psiquiatría.
+    		\item Erik Erikson: Psicoanalista.
+    		\item Leon Festinger: Psicólogo social.
+			\item Frederick Fitch: Lógico.
+			\item Clyde Kluckhohn: Antropología.
+			\item David Lloyd: Neurofisiología .
+			\item Wolfgang Köhler: Psychology. Mencionar que Köhler fue cancelada su asistencia debido al fallecimiento de Lewin .
+		\end{itemize}
+
+		McCulloch comienza a recopilar y distribuir un informe resumido sobre la conferencia. Esto ilustra la constatación de que las conferencias anteriores no se habían documentado adecuadamente. McCulloch intentó resumir los puntos clave de las primeras 3 conferencias después del tercer evento y luego lo distribuyó a los asistentes.\par
+ 
+		Erik Erikson da una presentación sobre \textbf{psiquiatría infantil}. Su enfoque se considera poco riguroso en comparación con el tono de las conferencias hasta la fecha. Aunque Bateson y Hutchinson presionan para la inclusión de Erikson en el grupo central, la oposición lo impide. Por su parte, Erikson estaba incómodo con el enfoque del grupo en las máquinas.\par
+
+		En relación con sus propios intereses de investigación (por ejemplo, autómatas celulares), von Neumann presiona para que se invite a un genetista a las conferencias. Este es el primer caso importante en el que von Neumann actúa no solo por iniciativa propia, sino con respecto a sus propios intereses temáticos personales.
+ 		
+ 		\subsection{Cuarta conferencia}
+		Esta cuarta conferencia se llevo acabo los días 23 y 24 de Octubre del año 1947 en New York como titulo ``Circular Causal and Feedback Mechanisms in Biological and Social Systems.'' o traducido al español ``Mecanismos circulares de causalidad y retroalimentación en sistemas biológicos y sociales.'' en la cual asistieron los personajes del grupo principal a excepción de Klüver que no asistió. Los invitados fueron los siguientes:
+		\begin{itemize}
+			\item Hans Lukas Teuber: Psicología.
+    		\item Morris Bender: Neurofisiología.
+    		\item Clyde Kluckhohn: Antropología.
+    		\item Juan Garcia Ramos (Mexicano).
+		\end{itemize}
+		Köhler presenta su perspectiva de 'campo', generando una controversia sustancial. Pitts y McCulloch critican la $"$teoría del campo$"$ de Köhler como mera teoría desprovista de base empírica.
+Este debate ilustra dos puntos importantes. Primero, hubo una \textbf{división entre aquellos interesados en los mecanismos de las arquitecturas neuronales} (por ejemplo, Pitts y McCulloch) y aquellos que expresaron interés en las \textbf{teorías descriptivas de lo que esos mecanismos podrían hacer} (por ejemplo, la percepción). En segundo lugar, siguió siendo el caso a lo largo de la serie de conferencias que las personas del mecanismo neuronal criticaban repetidamente lo que percibían como una teorización vaga o insípida.\par
+		Larga argumentación sobre las distinciones entre el carácter continuo o 'analógico' del modelo Gestalt de Köhler y la orientación codificada discretamente o 'digital' adoptada por McCulloch y Pitts.
+		\subsection{Quinta conferencia}
+		Esta quinta conferencia se llevo acabo los días 18 y 19 de Marzo del año 1948 en New York conservando el titulo de la conferencia pasada y en la cual asistieron los personajes del grupo principal añadiendo a 2 personajes, anteriormente uno fue invitado y con los siguientes invitados:
+		\begin{itemize}
+    		\item Hans Lukas Teuber: Psicología.
+    		\item Alex Bavelas: Psicosociólogo.
+			\item Invitado: Roman Jakobson: Lingüística.
+			\item Invitado: Dorothy Lee: Antropología.
+			\item Invitado: John Lotz: Lingüística.
+			\item Invitado: Charles Morris: Lingüística.
+			\item Invitado: Eilhardt von Domarus: Neuropsiquiatría.
+			\item Invitado: Max Delbrück: Biofísica (seleccionado por von Neumann esperando a que se volviera en miembro del grupo principal).
+		\end{itemize}
+ 		El programa del primer día, organizado por Mead y Bateson, se centra en el \textbf{lenguaje}. Aunque esta no es la única conferencia en la que el 'lenguaje' es un tema de presentación y discusión, es la única conferencia en la que se presentó un bloque completo de presentaciones sobre este tema.\par
+		El programa del segundo día estuvo dominado por las presentaciones de Wiener \textbf{(orden vs. caos)}, Pitts (modelado formal aplicado a la \textbf{formación del orden jerárquico de los pollos}) y Lee (concepto de $"$yo$"$ en el lenguaje).\par
+		\subsection{Sexta conferencia}
+		Esta segunda conferencia se llevo acabo los días 24 y 25 de Marzo del año 1949 en New York en la cual asistieron los personajes del grupo principal a excepción de Horrower quien renunció, ademas de que von Neumann y Lazarsfeld no asistieron. Los invitados fueron los siguientes:
+		\begin{itemize}
+    		\item Heinz von Foerster: Matemático (invitado a formar parte del grupo principal y acepto).
+    		\item Harold Abramson: Medicina.
+    		\item Howard Liddell: Psicología.
+    		\item Donald Lindsley: Psicología.
+    		\item David Lloyd: Neurofisiología. (segunda vez que fue invitado)
+    		\item Frederick Mettler: Anatomía.
+    		\item John Stroud: Psicología.
+		\end{itemize}
+		La conferencia comienza con la discusión de un mensaje de von Neumann. Habiendo calculado \textbf{el número de neuronas y conexiones interneuronales en el cerebro}, \textit{afirmó que las neuronas del cerebro eran insuficientes para tener en cuenta las capacidades humanas, y que los medios para lograr la 'complejidad' del cerebro deben incluir otros mecanismos como la estructura bioquímica de la neurona}. Los fisiólogos presentes se mostraron complacidos con esta idea. McCulloch defendió la viabilidad de su modelo neuronal y el de Pitts (que por lo tanto había sido cuestionado). El debate termina cuando Pitts \textbf{demuestra que las declaraciones de von Neumann se habían basado en un cálculo que no era válido}.\par
+		Klüver sugiere un tema de investigación para \textbf{analizar situaciones que conducen al trauma infantil}.\par
+		Kubie toma nota del\textbf{ papel del observador en el trabajo psicoanalítico} y afirma que el terapeuta debe permanecer lo más distante posible, incluso excluyendo los impulsos humanistas. Wiener plantea los problemas de medición que interfieren con los fenómenos observados en las ciencias. Fremont-Smith y Stroud se unen, el problema del observador se volvería tan prominente dos décadas después.\par
+		La presentación de Heinz von Foerster sobre la \textbf{memoria} se recibió cortésmente.\par
+		Es cierto que, intimidado por la longitud y la complejidad del título de la conferencia, von Foerster \textbf{recomienda que se adopte como título de la conferencia la etiqueta $"$cibernética$"$} publicada recientemente por Wiener.\par
+		Fremont-Smith hace un \textbf{llamamiento a la colaboración entre la física y la psicología} (y por implicación todas las ciencias $"$duras$"$ y $"$blandas$"$) que conduzca a la unificación de la ciencia. 
+ 		\subsection{Séptima conferencia}
+		Esta séptima conferencia se llevo acabo los días 23 y 24 de Octubre del año 1950 en New York como titulo ``Cybernetics: Circular Causal and Feedback Mechanisms in Biological and Social Systems.'' o traducido al español ``Cibernética: mecanismos circulares causales y de retroalimentación en sistemas biológicos y sociales.'', esto de acuerdo con la sugerencia de von Foerster, en la cual asistieron los mismos personajes del grupo principal a excepción de Lazarsfeld quien abandono el grupo principal, los invitados fueron los siguientes:
+		\begin{itemize}
+			\item Joseph Licklider: Psicólogo.
+    		\item Turner McLardy: Neuropsiquiatría.
+    		\item Claude Shannon: Ingeniería.
+			\item John Stroud: Psicólogo. (segunda vez que fue invitado)
+			\item Heinz Werner: Psicología del desarrollo.
+		\end{itemize}
+ 		Gerard comienza la conferencia con una presentación sobre las \textbf{interpretaciones de la mente 'analógicas' versus 'digitales'}. Afirma que \textit{la mente está más hacia lo $"$analógico$"$, cuestionando el modelo $"$digital$"$ basado en la lógica de Pitts y McCulloch}. Esto desencadena un animado debate que resulta frustrante para muchos de los participantes.\par
+		Bateson\textbf{ pide que se aclare la distinción entre $"$analógico$"$ y $"$digital$"$}. Él escucha los argumentos sobre la presentación de Köhler en la cuarta conferencia y sugirió que sería prudente eliminar cualquier ambigüedad. Es interesante notar que el viejo debate sobre 'analógico versus digital' seguía siendo un tema molesto.\par
+		El resto de la conferencia se dedica principalmente a presentaciones sobre \textbf{comunicación y lenguaje}.\par
+		En la 5ª conferencia se invirtió un bloque de tiempo en presentaciones sobre el \textbf{lenguaje humano}. Esta vez, el tema no era tanto el lenguaje en sí mismo, sino \textbf{cómo el lenguaje humano se cruzaba con las características relevantes para la teoría de la información de Shannon}.\par
+		El psicoanalista Kubie ofrece una presentación sobre \textbf{el lenguaje y los símbolos relacionados con la neurosis}. Esto desencadena un debate con Pitts y Bateson criticando el psicoanálisis desde dos perspectivas distintas. Pitts no puede discernir ninguna teoría coherente en el psicoanálisis, mientras que Bateson no puede discernir ninguna objetividad en los principios psicoanalíticos.\par
+		El invitado Licklider ofrece una presentación sobre el \textbf{análisis de la $"$inteligibilidad$"$ en las comunicaciones de voz}, un tema bastante distinto de la reducción de la incertidumbre como la teoría de la información de Shannon. Esto desencadena una serie de intercambios que deambulan por temas \textit{como el tono emocional y el habla de los loros}.\par 
+		Claude Shannon presenta un artículo sobre un \textbf{análisis formal de la redundancia semántica en inglés impreso}, enfocándose en la escritura como codificación e inclinando la discusión de los científicos sociales (energizados por Licklider) hacia los ingenieros.\par
+		Gerard hace comentarios críticos sobre las \textit{afirmaciones exageradas de la cibernética y la publicidad indebida dadas las conferencias recientes}.\par
+			El psicólogo Klüver critica tanto\textit{ la $"$teoría de campo $"$ de Köhler} como los \textit{modelos $"$digitales$"$ de McCulloch} con respecto a la percepción. Sugiere que ambos son demasiado abstractos para analizar de manera constructiva la funcionalidad del sistema visual.
+ 		\subsection{Octava conferencia}
+		Esta octava conferencia se llevo acabo los días 15 y 16 de Marzo del año 1951 en New York conservando el titulo de la conferencia anterior en la cual asistieron los mismos personajes del grupo principal a excepción de Beteson quien no asistió, sin embargo, von Neumann y Wiener abandonaron al grupo principal, los invitados fueron los siguientes:
+		\begin{itemize}
+    		\item Herbert Birch: Psicólogo animal.
+    		\item John Bowman: Sociólogo.
+    		\item Donald MacKay: Físico.
+    		\item David M. Rioch: Psiquiatra.
+    		\item Ivor Richards: Crítica literaria.
+    		\item Claude Shannon: Ingeniería (segunda vez que fue invitado).
+		\end{itemize}
+ 		Los puntos de vista de MacKay sobre la información (distintos de los de Shannon en virtud de tratar de incorporar el $"$significado$"$) son evidentes en su presentación, que da inicio a un debate sobre si \textbf{el significado es un componente intrínseco de la $"$información$"$}, ya que ese constructor se está utilizando en ese momento. Se puede ver este debate sobre el $"$significado$"$ y la $"$información$"$ como análogo a los debates anteriores sobre la $"$experiencia subjetiva$"$ versus los $"$mecanismos neuronales$"$. En ambos casos, algunos participantes querían abordar las cosas únicamente en términos de $"$vehículo$"$ cognitivo, mientras que otros querían abordar el $"$contenido$"$ cognitivo.\par
+		MacKay también sugirió que \textbf{los autómatas podrían ser capaces de realizar inferencias inductivas si se configuran para emplear estrategias aleatorias}. Esto trae una severa crítica del estadístico y teórico de la decisión Savage, quien afirma que \textit{la aleatoriedad no agrega nada al emular el comportamiento humano y solo puede disminuir la eficiencia en la resolución de problemas}.\par
+		Savage ofrece una presentación sobre su investigación fundamental sobre \textbf{la teoría de la decisión}, b\textit{asada en el análisis estadístico y basada en una métrica cuantificable de $"$utilidad$"$}. McCulloch responde críticamente, \textit{argumentando que los contextos de decisión no suelen reducirse a ninguna métrica unidimensional}.\par
+		Bavelas presenta algunos de sus experimentos recientes en \textbf{dinámica de grupos pequeños y comunicaciones grupales}.\par
+		La discusión de los experimentos estructurados (y similares a juegos) de Bavelas \textit{abarca desde la aplicabilidad de la teoría de juegos de von Neumann a las motivaciones psíquicas a la percepción extrasensorial, a la aplicabilidad del 'significado' dentro de una 'teoría de la información' a la ansiedad por las máquinas automáticas al papel de las máquinas como modelos en la comprensión de la cognición humana}.\par
+		El crítico literario Richards ofrece una presentación sobre el \textbf{tipo de lenguaje necesario para abordar y analizar el lenguaje en sí}.\par
+		El investigador de comunicaciones animales Herbert Birch hace una presentación en la que \textbf{hace una distinción entre interacciones que son meramente 'comportamiento' versus lo que él llama 'comunicación verdadera' en animales superiores y humanos}. Esta $"$verdadera comunicación$"$ que Birch caracteriza por implicar anticipación, intencionalidad, simbolización, aprendizaje y compromiso social. Rosenblueth y Bigelow responden de manera muy crítica, afirmando que los elementos de la $"$verdadera comunicación$"$ de Birch implican nociones mentalistas ambiguas que son enemigas del enfoque no mentalista que subyace a su investigación cibernética paradigmática.\par
+		A medida que se desarrollaba el debate recurrente sobre el estado de la psiquiatría como 'científico', Rosenblueth \textit{afirma que el enfoque y el lenguaje generales de las ciencias naturales pueden manejar los problemas abordados por la psiquiatría}, y Pitts \textit{afirma que los psiquiatras tienen la responsabilidad de demostrar que sus métodos son 'científicos' o de lo contrario}.
+ 		\subsection{Novena conferencia}
+		Esta novena y penúltima conferencia se llevo acabo los días 20 y 21 de Marzo del año 1952 en New York conservando el titulo de las anteriores conferencias en la cual asistieron los mismos personajes del grupo principal a excepción de Savage y Northrop quienes no asistieron, los invitados fueron los siguientes:
+		\begin{itemize}
+    		\item W. Ross Ashby: Psiquiatría.
+    		\item John Bowman: Sociólogo (segunda vez que fue invitado).
+    		\item Duncan Luce: Psicólogo.
+			\item Marcel Monnier: Medicina.
+    		\item Henry Quastler: Medicina, Ingeniería en computación.
+    		\item Antoine Remond: Neurofisiología.
+    		\item Mottram Torre: Gestión de personal.
+    		\item Jerome Wiesner: Neuroanatomía .
+    		\item John Z. Young: Neurofisiología.
+		\end{itemize}
+ 		McCulloch abre la conferencia con observaciones sobre el aumento de las interrupciones en la coherencia de la serie de conferencias. Cita los problemas de horarios contradictorios que habían obligado a varios clientes habituales a estar en otra parte. También cita el creciente secretismo impuesto a los proyectos de algunos participantes (von Neumann y Bavelas) que impide la presentación y discusión de trabajos relevantes.\par
+		Los intereses divergentes continúan caracterizando las discusiones de los participantes. Por ejemplo, Bateson\textit{ responde a la presentación de Gerard sobre la excitación / inhibición neuronal preguntando cómo se pueden relacionar esas minucias neurofisiológicas con cuestiones filosóficas o epistemológicas más amplias}.\par
+ 		Bateson hace una presentación \textbf{sobre el humor y la comunicación}, lo que lo llevó a desvelar \textit{la noción de que la paradoja (la clave del humor que defendía) estaba en el corazón de toda comunicación humana}.\par
+		W. Ross Ashby presenta 2 artículos:\textbf{ uno sobre su 'homeostato'} y el otro sobre \textbf{las perspectivas de que los autómatas que juegan al ajedrez requieran tácticas aleatorias antes de que puedan derrotar a los oponentes humanos}. Aunque más tarde se convertiría en uno de los cibernéticos más famosos, esta fue la única aparición de Ashby en la serie de conferencias Macy.\par
+		Bigelow y Pitts interrogan a Ashby sobre su homeostat y lo desafían a que explique cómo $"$aprende$"$.\par
+		Guest Quastler propone \textbf{la aplicación de la cibernética a nivel micro en relación con los procesos bioquímicos y celulares}. Presenta un \textbf{conjunto de valores estimados de 'complejidad' en organismos biológicos, basados en la cantidad de información que representan o pueden representar}. La noción de cuantificar la $"$complejidad$"$ serviría como semilla para los $"$estudios de complejidad$"$, uno de los muchos supuestos sucesores de la cibernética en los últimos días.\par
+		\subsection{Décima conferencia}
+		Esta décima y ultima conferencia se llevo acabo los días 22 y 24 de Abril del año 1953 en Princeton New Jersey  conservando el titulo de las anteriores conferencias en la cual asistieron los mismos personajes del grupo principal, los invitados fueron los siguientes:
+		\begin{itemize}
+    		\item Vahe Amassian: Neurofisiología.
+    		\item Yehoshua Bar-Hillel: Matemático.
+    		\item John Bowman: Sociólogo (tercera vez que fue invitado).
+			\item Yuen Ren Chao: Lingüística.
+    		\item Jan Droogleever-Fortuyn: Neuropsicología.
+    		\item Henry Quastler: Medicina, Ingeniería en computación.
+    		\item Claude Shannon: Ingeniería (tercera vez que fue invitado).
+    		\item William Grey-Walter: Neurología.
+		\end{itemize}
+		McCulloch informa sobre su trabajo y el de Pitts sobre cómo \textbf{los mecanismos neuronales pueden reconocer formas y acordes musicales}. Cita fuertes argumentos de otros que refutan este trabajo, y termina con una concesión bondadosa de que sus esfuerzos y los de Pitts han estado en la fina tradición de la refutabilidad científica.\par
+		McCulloch tiene la tarea de escribir un resumen final del consenso logrado durante las 10 conferencias de Macy. McCulloch escribe en parte:\textbf{ $"$Nuestro acuerdo más notable es que hemos aprendido a conocernos un poco mejor ya luchar de forma justa en mangas de camisa$"$}. \par
+		Como presidente de las 10 conferencias de Macy, McCulloch sin duda deseaba retratar la serie como si hubiera producido algo. Su concesión de lo que solo puede llamarse un resultado de redes sociales ilustra cómo las Conferencias Macy ni siquiera entonces podrían interpretarse como si hubieran producido una teoría unificada o metadisciplinaria del tipo al que había aspirado Fremont-Smith.
+	\begin{thebibliography}{1}
+ \bibitem[label1]{cite_key1} Maturana, H. and von Foerster, H., n.d. ASC: Foundations: History of Cybernetics. [online] Asc-cybernetics.org. Available at: https://asc-cybernetics.org/foundations/history2.htm [Accessed 16 April 2021].	
+ \bibitem[label2]{cite_key2} Es.qaz.wiki. 2021. Macy conferences - Wikipedia. [online] Available at: \url{https://es.qaz.wiki/wiki/Macy_conferences#Conference_topics} [Accessed 16 April 2021].
+  \bibitem[label3]{cite_key3}Quote.ucsd.edu. 2017. Participants | Performing Cybernetics. [online] Available at: https://quote.ucsd.edu/performingcybernetics/participants/ [Accessed 16 April 2021].
+  \bibitem[label4]{cite_key4}Maturana, H. and von Foerster, H., n.d. Summary: The Macy Conferences. [online] Asc-cybernetics.org. Available at: https://asc-cybernetics.org/foundations/history/MacySummary.htm [Accessed 16 April 2021].
+\end{thebibliography}
+
+\end{document}
