@@ -24,6 +24,8 @@ numIteraciones = tkinter.StringVar()
 esAleatorio = tkinter.IntVar()
 esEspecifico = tkinter.IntVar()
 posicionesUnos = tkinter.StringVar()
+esAnimado = tkinter.IntVar()
+
 
 color0 = "#ffffff"
 color1 = "#000000"
@@ -47,7 +49,7 @@ def colorto1():
     showColor1.config(bg=color1)
 
 def saveCondic():
-    celulasIniciales = cellularAutomaton.resultadoAutomata[0,:]
+    celulasIniciales = cellularAutomaton.automataCelular[0,:]
     with open('celulasIniciales.txt', 'wb') as f:
         np.savetxt(f, np.column_stack(celulasIniciales), fmt='%1f')
     tkinter.messagebox.showinfo("Save condition", "Successfully saved") 
@@ -66,26 +68,31 @@ def fileselectD():
         arregloInicial = []
         labelLoadCondicion.config(text = "File Error")
 
+def messageAnim():
+    if(esAnimado.get() == 1):
+        tkinter.messagebox.showwarning(title="Warning", message="If you have a lot of iterations and you need the results quickly, I don't recommend enable this option")
+    
 def iniciar():
     numPasos = int(numIteraciones.get())
     ruleEntero = int(reglaValor.get())
+    animacion = int(esAnimado.get())
     if(esBinario.get() == 1):
         ruleString = reglaValor.get()
         ruleEntero = int(ruleString,2)
     if(len(arregloInicial) != 0):    
-        cellularAutomaton.IniciarArchivo(color0,color1,numPasos,ruleEntero,arregloInicial)#color 0, color 1, pasos,regla,
+        cellularAutomaton.IniciarArchivo(color0,color1,numPasos,ruleEntero,arregloInicial,animacion)#color 0, color 1, pasos,regla,
     else:
         tamEsp = int(tamEspacio.get())
         if(esAleatorio.get()==1):
-            cellularAutomaton.IniciarRandom(color0,color1,numPasos,ruleEntero,tamEsp)
+            cellularAutomaton.IniciarRandom(color0,color1,numPasos,ruleEntero,tamEsp,animacion)
         else:
             if '%' in posicionesUnos.get():
                 unosEntero = int(posicionesUnos.get().replace('%',''))/100
-                cellularAutomaton.IniciarProbabilidad(color0,color1,numPasos,ruleEntero,tamEsp,unosEntero)
+                cellularAutomaton.IniciarProbabilidad(color0,color1,numPasos,ruleEntero,tamEsp,unosEntero,animacion)
             else:
                 unosString = posicionesUnos.get().split(',')
                 unosArray = list(map(int, unosString))
-                cellularAutomaton.IniciarEspecifico(color0,color1,numPasos,ruleEntero,tamEsp,unosArray)
+                cellularAutomaton.IniciarEspecifico(color0,color1,numPasos,ruleEntero,tamEsp,unosArray,animacion)
 
 #------------------------------CREAR INTERFAZ---------------------------------
 
@@ -156,6 +163,10 @@ las = tkinter.Entry(frameMainInformacion,font=("times new roman", 14), textvaria
 las.grid(row=6,column = 1)
 labelEspecifico.grid_remove()
 las.grid_remove()
+
+#------------------------------ANIMACION -------------------
+checkAnimado = tkinter.Checkbutton(frameMainInformacion, text="Enable Animation", variable=esAnimado, command=messageAnim, font=("times new roman", 14))
+checkAnimado.grid(row=7, column=0)
 
 #------------------------------BOTON MAESTRO---------------------------------
 
