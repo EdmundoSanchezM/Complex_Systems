@@ -4,6 +4,7 @@ from tkinter import colorchooser
 from tkinter.filedialog import askopenfilename
 import numpy as np
 import Logica as cellularAutomaton
+import matplotlib.pyplot as plt
 #------------------------------CREAR VENTANA---------------------------------
 root = tkinter.Tk()
 root.wm_title("Elementary Cellular Automaton")
@@ -17,6 +18,7 @@ frameStart = tkinter.Frame(root)
 global color0
 global color1
 global arregloInicial
+global detener
 esBinario = tkinter.IntVar()
 reglaValor = tkinter.StringVar()
 tamEspacio = tkinter.StringVar()
@@ -26,10 +28,11 @@ esEspecifico = tkinter.IntVar()
 posicionesUnos = tkinter.StringVar()
 esAnimado = tkinter.IntVar()
 
-
 color0 = "#ffffff"
 color1 = "#000000"
 arregloInicial = []
+detener = False
+
 def chageLabel():
     if(esEspecifico.get() == 0):
         labelEspecifico.grid_remove()
@@ -71,8 +74,30 @@ def fileselectD():
 def messageAnim():
     if(esAnimado.get() == 1):
         tkinter.messagebox.showwarning(title="Warning", message="If you have a lot of iterations and you need the results quickly, I don't recommend enable this option")
+
+def stopcontAnim():
+    global detener
+    detener  ^= True
+    if detener:
+        cellularAutomaton.anim_automata.event_source.stop()
+        cellularAutomaton.anim_densidad.event_source.stop()
+        cellularAutomaton.anim_log10.event_source.stop()
+        cellularAutomaton.anim_media.event_source.stop()
+        cellularAutomaton.anim_varianza.event_source.stop()
+        cellularAutomaton.anim_densidad_central.event_source.stop()
+    else:
+        cellularAutomaton.anim_automata.event_source.start()
+        cellularAutomaton.anim_densidad.event_source.start()
+        cellularAutomaton.anim_log10.event_source.start()
+        cellularAutomaton.anim_media.event_source.start()
+        cellularAutomaton.anim_varianza.event_source.start()
+        cellularAutomaton.anim_densidad_central.event_source.start()
+
+def deletePlt():
+    plt.close("all")
     
 def iniciar():
+    plt.close("all")
     numPasos = int(numIteraciones.get())
     ruleEntero = int(reglaValor.get())
     animacion = int(esAnimado.get())
@@ -167,6 +192,12 @@ las.grid_remove()
 #------------------------------ANIMACION -------------------
 checkAnimado = tkinter.Checkbutton(frameMainInformacion, text="Enable Animation", variable=esAnimado, command=messageAnim, font=("times new roman", 14))
 checkAnimado.grid(row=7, column=0)
+
+buttonStop = tkinter.Button(frameMainInformacion, text="Stop/Continue animation", command=stopcontAnim, font=("times new roman", 14))
+buttonStop.grid(row=7, column=1)
+
+buttonDeletePlt = tkinter.Button(frameMainInformacion, text="Delete all plots", command=deletePlt, font=("times new roman", 14))
+buttonDeletePlt.grid(row=8, column=0)
 
 #------------------------------BOTON MAESTRO---------------------------------
 

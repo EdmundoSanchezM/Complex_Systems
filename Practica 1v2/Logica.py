@@ -6,7 +6,12 @@ from matplotlib.animation import FuncAnimation
 
 global unosxPaso 
 global probabilidadUnoxPaso 
-
+global anim_automata
+global anim_densidad
+global anim_log10
+global anim_media
+global anim_varianza
+global anim_densidad_central
 def GraficaVarianza():#Momento 2 = Sum(x^2*f(x)) - E[x]^2=> Momento 2 = 0*f(x) + 1*f(x) - (1*f(x=1))^2 = f(x=1) - f(x=1)^2
     global probabilidadUnoxPaso
     plot4 = plt.figure(3)
@@ -115,6 +120,13 @@ def GenerarAutomataCelular(arreglo,nPasos, reglaNumero,cmap,isAnimado):
     global unosxPaso
     global automataCelular
     global regla
+    #-Variables anim
+    global anim_automata
+    global anim_densidad
+    global anim_log10
+    global anim_media
+    global anim_varianza
+    global anim_densidad_central
     #-Variables globales para animacion
     global cax1
     global ax1
@@ -129,7 +141,6 @@ def GenerarAutomataCelular(arreglo,nPasos, reglaNumero,cmap,isAnimado):
     global valor_y_varianza
     global valor_y_media
     global valor_y_densidad_central
-
     valor_y_densidad = []
     valor_y_log10 = []
     valor_y_varianza = []
