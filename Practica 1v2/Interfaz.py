@@ -5,6 +5,7 @@ from tkinter.filedialog import askopenfilename
 import numpy as np
 import Logica as cellularAutomaton
 import matplotlib.pyplot as plt
+import RegExGenerator as RegEx
 #------------------------------CREAR VENTANA---------------------------------
 root = tkinter.Tk()
 root.wm_title("Elementary Cellular Automaton")
@@ -27,6 +28,7 @@ esAleatorio = tkinter.IntVar()
 esEspecifico = tkinter.IntVar()
 posicionesUnos = tkinter.StringVar()
 esAnimado = tkinter.IntVar()
+useRegex = tkinter.IntVar()
 
 color0 = "#ffffff"
 color1 = "#000000"
@@ -97,14 +99,19 @@ def deletePlt():
     plt.close("all")
     
 def iniciar():
+    global arregloInicial
     plt.close("all")
     numPasos = int(numIteraciones.get())
     ruleEntero = int(reglaValor.get())
     animacion = int(esAnimado.get())
+    usarexpre = int(useRegex.get())
     if(esBinario.get() == 1):
         ruleString = reglaValor.get()
         ruleEntero = int(ruleString,2)
-    if(len(arregloInicial) != 0):    
+    if(len(arregloInicial) != 0 or usarexpre==1):
+        if(usarexpre==1):
+            tamEsp = int(tamEspacio.get())
+            arregloInicial = RegEx.start_RegEx(tamEsp,ruleEntero)
         cellularAutomaton.IniciarArchivo(color0,color1,numPasos,ruleEntero,arregloInicial,animacion)#color 0, color 1, pasos,regla,
     else:
         tamEsp = int(tamEspacio.get())
@@ -181,7 +188,8 @@ checkAleatoria = tkinter.Checkbutton(frameMainInformacion, text="Random", variab
 checkAleatoria.grid(row=5, column=1)
 tipoCondicion = tkinter.Checkbutton(frameMainInformacion, text = "Specific" , variable=esEspecifico, command=chageLabel,font=("times new roman", 14))
 tipoCondicion.grid(row=5,column = 3)
-
+expresionRegular = tkinter.Checkbutton(frameMainInformacion, text = "Use regular expression (rule 22 & 54 only)", variable=useRegex,font=("times new roman", 14))
+expresionRegular.grid(row=7,column = 0,columnspan=2)
 labelEspecifico = tkinter.Label(frameMainInformacion, text = "Indices to complete with 1 or use % \nat the end to assign probability to 1's:" , font=("times new roman", 14))
 labelEspecifico.grid(row=6,column = 0)
 las = tkinter.Entry(frameMainInformacion,font=("times new roman", 14), textvariable = posicionesUnos)
@@ -191,13 +199,13 @@ las.grid_remove()
 
 #------------------------------ANIMACION -------------------
 checkAnimado = tkinter.Checkbutton(frameMainInformacion, text="Enable Animation", variable=esAnimado, command=messageAnim, font=("times new roman", 14))
-checkAnimado.grid(row=7, column=0)
+checkAnimado.grid(row=8, column=0)
 
 buttonStop = tkinter.Button(frameMainInformacion, text="Stop/Continue animation", command=stopcontAnim, font=("times new roman", 14))
-buttonStop.grid(row=7, column=1)
+buttonStop.grid(row=8, column=1)
 
 buttonDeletePlt = tkinter.Button(frameMainInformacion, text="Delete all plots", command=deletePlt, font=("times new roman", 14))
-buttonDeletePlt.grid(row=8, column=0)
+buttonDeletePlt.grid(row=9, column=0)
 
 #------------------------------BOTON MAESTRO---------------------------------
 
