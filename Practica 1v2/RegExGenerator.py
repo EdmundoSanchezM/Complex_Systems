@@ -58,7 +58,3 @@ def start_RegEx(longitud, regla):
     cadena_generada = logica(longitud, regla)
     arreglo_RegEx = np.array(list(cadena_generada)).astype(np.int8)
     return arreglo_RegEx
-
-
-if __name__ == "__main__":
-    main()
