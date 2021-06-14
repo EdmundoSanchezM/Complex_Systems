@@ -325,235 +325,656 @@ La situación de máxima incertidumbre nos genera que sea más difícil predecir
 		 Por otro lado tenemos al autómata generado por expresión regular y a simple viste podemos observar como volvemos a ver un comportamiento muy similar a los autómatas generados por la expresión regular. Observado las métricas que tenemos disponibles observamos como el numero de unos tiene un máximo de 652 unos a tener un mínimo de 35 para después incrementar y empezar a rondar los valores de 152 a 500 células con valor 1, también vemos como la densidad de la columna central al inicio tienen un crecimiento constante hasta el paso 23 para después crecer de una forma linea pero volvemos a ver como hay partes en donde es constante, estudiando la entropia podemos ver que es ligeramente diferentes a las anteriormente estudiadas, aunque el inicio es similar, empezamos de valores bajos para poco después subir prácticamente al máximo, oscilar entre el valor máximo y 0.775, para después no oscilar tanto y al final, en este autómata, para que la entropia crece entre la iteración 300 y la 400 llegando a un valor de 0.965, esto quiere decir que en nuestro sistema empezamos con una baja entropia para después oscilar entre valores altos de entropia, esto nos dice que somos incapaces de predecir el siguiente estado nuestro autómata y tenemos una alta incertidumbre.\par
 		 Una vez visto estas tres pruebas podemos decir que la expresión regular nos genera autómatas comunes, sin embargo, en la prueba del 95\% vemos como se nos genera un autómata muy similar a los generados por al expresión regular, al igual es similar en las métricas que se nos genera, esto nos quiere decir que nuestros autómatas que genera la expresión regular tienen una gran cantidad de 1's, volvemos a ver como el uso de la opción de generar una condición completamente aleatoria nos genera resultados completamente diferentes tanto a la expresión regular como al porcentaje de unos.	
 	\section{Atractores}
-	Podemos hacer una representación visual de los autómatas celulares, y para que podamos entenderlo de mejor manera es necesario mencionar los límites y las fronteras, del espacio en el cual existe el autómata celular
-
-		\subsection{Frontera abierta}
-		Considera que todas las células fuera del espacio del autómata tienen un valor el cual es fijo.	
-		
-		\subsection{Frontera reflectora}
-		Las células fuera del espacio del autómata toman los valores que están dentro como si se tratase de un espejo.
-
-		
-
-		
-	\section{Programa}	
-		\subsection{Descripción}
-		Para este primer programa se ha creado nuestro primer autómata celular, el autómata celular a crear debido a sus características se le conoce como un autómata celular elemental (ECA) que se regirá por la regla 30 (hay 256 reglas de la 0 hasta la 255), pero ¿Cuáles son esas características para que nuestro autómata celular sea considerado como un ECA? Las características son las siguientes:
-		\begin{itemize}
-    		\item Espacio unidimensional.
-		    \item Tiene dos posibles estados o valores para cada célula (0 o 1).
-		    \item La reglas que dependen solo de los valores del vecino más cercano.
-		    \item Es de tipo frontera periódica o circular.
-		\end{itemize}\par
-		Nuestro ECA sera regido por la regla 30 o 00011110$_2$, la cual nos estable nuestra función local, es decir, nos define como las células cambiaran de estado en la siguiente iteración dependiendo de los estados o valores de la generación anterior teniendo en cuenta que necesitaremos de una célula central y dos células vecinas, una a cada lado, por lo que el comportamiento seria el siguiente:
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.7]{resources/ElementaryCA30Rules_750.png}
-			\caption{Comportamiento de la regla 30}\label{fig:picture}
-		\end{figure}
-		En la imagen 3 podemos ver 8 figuras diferentes entre si, si vemos la primera fila compuesta de 3 células son las combinaciones posibles de los estados (0 o 1, blanco o negro) la célula de abajo nos da el estado que poseerá la hija de la siguiente iteración, es decir, si encontramos 3 células con estado 1 (color negro) en la siguiente iteración nos generaran una célula con el estado 0 (color blanco) o por ejemplo si encontramos que nuestras dos primeras células tienen estado 0 y la ultima tiene el estado 1 entonces la célula de la próxima iteración tendrá el valor 1.\par
-
-		Para el desarrollo de este programa se uso el lenguaje de programación Python usando Tkinter y Matplotlib para la creación de nuestra GUI y las gráficas correspondientes, el entorno de desarrollo utilizado fue Visual Studio Code. Mencionar que aunque nuestro programa nos permite usar cualquiera de las 256 reglas, en esta ocasión solo nos enfocaremos en la regla 30. Mencionar que nuestro archivo principal y el que se debe de ejecutar es el archivo con el nombre Interfaz.py ya que el archivo Logica.py solo contiene la parte lógica del programa y parte de la graficacón de los resultados.
-		\newpage
-		\subsection{Pruebas}
-		Este programa tiene varios aspectos que han sido cubiertos. Para iniciar las pruebas
-crearemos un autómata de 1000 células con 1000 iteraciones, algo especial de este autómata es que tenemos solo una célula con valor 1 en medio de todas las demás células que tienen valor 0.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.42]{resources/prueba1.png}
-			\caption{ECA con solo una célula con valor 1. Regla 30}\label{fig:picture}
-		\end{figure}
-		Como vemos en la figura 4 tenemos en el lado derecho de la imagen nuestro ECA resultante después de aplicar 1000 iteraciones con la regla 30 y en la parte superior izquierda tenemos el crecimiento de células con valor 1 durante esas 1000 iteraciones, podemos apreciar que su crecimiento nos recuerda a un crecimiento logarítmico. En ambas gráficas tenemos la posibilidad de agrandar el tamaño mediante el icono de la lupa que tenemos en la parte inferior de ambas ventanas, una vez seleccionada la lupa podremos seleccionar un área rectangular en nuestra gráfica para poder agrandar lo que abarque dicha área, esto con el fin de visualizar aun mejor nuestro autómata y el crecimiento de nuestras células con valor 1 como se ve en la figura 5.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.42]{resources/prueba2.png}
-			\caption{ECA con solo una célula con valor 1 agrandando el tamaño para poder visualizar aun mejor el comportamiento. Regla 30}\label{fig:picture}
-		\end{figure}
-		Nuestro programa también nos permite guardar nuestra configuración de nuestro ECA, en este caso solo toma la iteración 0 y es guardado en un archivo con el siguiente nombre $"$celulasIniciales.txt$"$ en caso de existir sobre escribirá la nueva información, en caso contrario lo creara desde cero, mencionar que si se desea se puede modificar el nombre pero no la extensión posterior de haber creado el archivo. En este caso nuestro programa nos arroja un mensaje diciendo que el archivo fue guardo exitosamente y se nos crea un archivo con el nombre y extensión anteriormente mencionados (ver figura 6 y 7).
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.42]{resources/archivoSave.png}
-			\caption{Iteración 0 de nuestro ECA guardada exitosamente}\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.5]{resources/archivoSave2.png}
-			\caption{Contenido del archivo}\label{fig:picture}
-		\end{figure}
-		También como era de esperarse se puede cargar archivo de texto al programa para volver a usarlo, algo importante a mencionar es que no guarda ni el numero de iteraciones, los colores para los valores 0 y 1 ni la regla usada esto con fines de facilitar al usuario poder usar un mismo inicio con diferentes reglas y numero de iteraciones cada vez que le plazca hacerlo. En la figura 8 cargamos nuestro archivo y solo modificamos el color que se le asigna a los valores 0 y 1, colocamos la regla a usar (regla 30) y nuestro numero de iteraciones sera de nuevo 1000, el panel para poder elegir el color se puede observar en la figura 9.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.42]{resources/automataHappy.png}
-			\caption{ECA con diferentes colores para los valores 0 y 1}\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.5]{resources/elegirColor.png}
-			\caption{Panel para poder elegir color para valores 0 y 1}\label{fig:picture}
-		\end{figure}
-		Realizando otra prueba crearemos un ECA con un tamaño de 500 células con 500 iteraciones, pero en esta ocasión la regla 30 sera ingresada como numero binario (00011110$_2$) y serán asignadas células con valor 1 de forma aleatoria.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.42]{resources/pruebaF.png}
-			\caption{ECA de 500 células por 500 iteraciones creado de forma aleatoria}								\label{fig:picture}
-		\end{figure}
-		Como ultimas pruebas realizaremos lo siguiente:  mediante las reglas 15, 22, 30, 54, 110 y 126 para la construcción de nuestro ECA mostraremos 3 evoluciones por cada regla en espacios de 400 células por 400 iteraciones, una empezara con un uno al centro, otra iniciando con un 50\% de probabilidad de unos y la última iniciando con un 95\% de probabilidad de unos.\par
-		Empecemos así con nuestra regla 15, veremos a través de de las imágenes 11 a la 14 el comportamiento de nuestro ECA con base en donde se encuentren las células iniciales con valor 1.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add1.png}
-			\caption{ECA de 400 células por 400 iteraciones con una célula inicial central, regla 15}								\label{fig:picture}
-		\end{figure}
-		Para visualizar mejor la información nuestras gráficas hagamos una ampliación de las mismas para las primeras 50 iteraciones.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.35]{resources/add1z.png}
-			\caption{ECA de 400 células por 400 iteraciones con una célula inicial central con aumento, regla 15}								\label{fig:picture}
-		\end{figure}
-		Como vemos el comportamiento de nuestro ECA es de una forma constante y es que en la iteración tenemos 1 célula viva a pasar a tener 399 células y a la siguiente volvemos a tener solo una, como si de un ciclo se tratase.\par
-		Pasando a la siguiente prueba, usaremos el 50\% de unos y observemos su comportamiento
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add2.png}
-			\caption{ECA de 400 células por 400 iteraciones con 50\% de probabilidad de 1's, regla 15}								\label{fig:picture}
-		\end{figure}		
-		Como vemos tiene un comportamiento similar a la primera prueba solo que el numero de células vivas por iteración cambiaron, ahora son menos que en la prueba anterior.
-		Como ultima prueba para esta regla, la probabilidad a usar sera del 95\% así que veamos el resultado
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add3.png}
-			\caption{ECA de 400 células por 400 iteraciones con 95\% de probabilidad de 1's, regla 15}								\label{fig:picture}
-		\end{figure}		
-		El resultado nuevamente es muy similar a los anteriores, por lo que podemos suponer que si probamos diferentes configuraciones iniciales siempre serán parecidas, solo cambiaran el numero de 1's.\par
-		Continuando con las pruebas, ahora vayamos con la regla 22 de aquí en adelante se mostraran las 3 imágenes correspondientes con los 3 valores iniciales diferentes para posteriormente dar un pequeño estudio de los resultados.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add4.png}
-			\caption{ECA de 400 células por 400 iteraciones con una célula inicial central, regla 22}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add5.png}
-			\caption{ECA de 400 células por 400 iteraciones con 50\% de probabilidad de 1's, regla 22}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add6.png}
-			\caption{ECA de 400 células por 400 iteraciones con 95\% de probabilidad de 1's, regla 22}								\label{fig:picture}
-		\end{figure}
-		Como se ven desde la figura 15 a la 17 con esta regla si cambia el comportamiento de nuestras gráficas con base a cada tipo de condición inicial, aunque la figura 15 y 17 tiene ciertas similitudes pero no son lo mismo, empezamos a ver que tan influyente es la regla en el comportamiento de nuestro ECA. \par 
-		Ahora pasemos a la regla 30 con las mismas pruebas.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add7.png}
-			\caption{ECA de 400 células por 400 iteraciones con una célula inicial central, regla 30}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add8.png}
-			\caption{ECA de 400 células por 400 iteraciones con 50\% de probabilidad de 1's, regla 30}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add9.png}
-			\caption{ECA de 400 células por 400 iteraciones con 95\% de probabilidad de 1's, regla 30}								\label{fig:picture}
-		\end{figure}
-		Como vemos en las figuras 18 a la 20 esta regla nos recuerda el comportamiento de la regla anterior, en el sentido de que las figuras 18 y 20 son muy similares en su comportamiento el cual es como un crecimiento logarítmico, en cambio la figura 19 tiene un comportamiento caótico.\par
-		Continuando, ahora veremos la regla 54.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add10.png}
-			\caption{ECA de 400 células por 400 iteraciones con una célula inicial central, regla 54}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add11.png}
-			\caption{ECA de 400 células por 400 iteraciones con 50\% de probabilidad de 1's, regla 54}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add12.png}
-			\caption{ECA de 400 células por 400 iteraciones con 95\% de probabilidad de 1's, regla 54}								\label{fig:picture}
-		\end{figure}
-		Con esta regla si observamos un cambio en nuestras 3 pruebas que las 3 son diferentes entre si, pero, si observamos la figura 22 y la 23 encontramos una similitud un poco sutil en nuestro ECA y es que ambos generan lineas rectas que $"$dividen$"$ a nuestro ECA de formar vertical, caso contrario a la figura 21 que podríamos decir que esa división pasa a su forma horizontal\par 
-		Pasando con la penúltima regla a probar la cual es la regla 110.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add13.png}
-			\caption{ECA de 400 células por 400 iteraciones con una célula inicial central, regla 110}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add14.png}
-			\caption{ECA de 400 células por 400 iteraciones con 50\% de probabilidad de 1's, regla 110}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add15.png}
-			\caption{ECA de 400 células por 400 iteraciones con 95\% de probabilidad de 1's, regla 110}								\label{fig:picture}
-		\end{figure}
-		Sin duda es la regla con un comportamiento muy interesante, en la figura 24 vemos un crecimiento lineal en los números de células con valor 1, caso contrario de las figuras 25 y 26 las cuales tienen un comportamiento diferente la cual nos recuerda al crecimiento logarítmico, pero, mencionar que la figura 25 no se visualiza tan claramente este comportamiento, de hecho pareciera que estuviéramos algún tipo de filtro en las gráficas de la figura 25 y así obtenemos las gráficas de la figura 26.\par
-		Finalmente, tenemos la regla 126.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add16.png}
-			\caption{ECA de 400 células por 400 iteraciones con una célula inicial central, regla 126}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add17.png}
-			\caption{ECA de 400 células por 400 iteraciones con 50\% de probabilidad de 1's, regla 126}								\label{fig:picture}
-		\end{figure}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.26]{resources/add18.png}
-			\caption{ECA de 400 células por 400 iteraciones con 95\% de probabilidad de 1's, regla 126}								\label{fig:picture}
-		\end{figure}
-		En el caso de la regla 126 nos recuerda a la regla 22 y es que las imágenes resultantes son muy parecidas, sin embargo, en los casos del 50\% y 95\% vemos como ahora las gráficas son mas definidas en contraste a la regla 22 y que de hecho se parecen a gráficas anteriores en donde mencionamos que se nos recuerda a un crecimiento logarítmico.
-		\subsection{Añadidos}
-		Como añadidos al programa se agregaron 3 tipos de gráficas, las cuales son las siguientes:
-		\begin{itemize}
-    		\item Gráfica de logaritmo base 10 de la cantidad de células con valor 1 por cada iteración.
-		    \item Gráfica del valor esperado o promedio.
-		    \item Gráfica de la varianza o segundo momento.
-		\end{itemize}\par		
-
- 		Finalmente para la gráfica de la varianza o segundo momento se usa la siguiente formula para el caso discreto. \[ \sigma^2 =  E[(x-\mu)^2]\] La cual puede ser reducida mediante desarrollo matemático quedando de la siguiente manera: \[ \sigma^2 =  E[(x-\mu)^2] = E[x^2-2x\mu+\mu^2]\]        \[ \sigma^2 = E[x^2]-E[2x\mu]+E[\mu^2]\]	\[ \sigma^2 = E[x^2]-2\mu E[x]+\mu^2\]						\[ \sigma^2 = E[x^2]-2\mu\mu+\mu^2\]	\[ \sigma^2 = E[x^2]-2\mu^2+\mu^2\] Finalmente tenemos que: 	\[ \sigma^2 = E[x^2]-\mu^2\]
- 		Por lo que, retomando lo mencionado para el desarrollo de la gráfica 2 o la gráfica de nuestro promedio o valor esperado solo necesitamos el valor de $f(x=1)$, nuestra nuestra formula para la varianza y finalmente saber que $E[x^n] =  \sum_{x} x^n *f(x) $, así, sustituyendo valores obtendríamos lo siguiente sera: \[ \sigma^2 = (1^2*f(x=1)) - f(x=1)^2 = f(x=1) - f(x=1)^2 \] Finalmente la formula a usar para la varianza: \[ \sigma^2 = f(x=1) - f(x=1)^2 \]
- 		Ahora hagamos una prueba, en la cual la regla a usar sera la regla 30, un tamaño de 1000 células con 1000 iteraciones, colores por defecto y asignación de células con valor 1 de manera aleatoria.
- 		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.35]{resources/pruebaF1.png}
-			\caption{ECA de 1000 células por 1000 iteraciones creado de forma aleatoria}\label{fig:picture}
-		\end{figure}
-		Como podemos observar tenemos 3 graficas que tienen una forma similar o casi iguales las cuales son la cantidad de 1's por iteración, $log$ de la cantidad de 1's y el valor esperado, esto es lógico ya que solo estamos cambiando la $"$escala$"$ de una misma representación, la única gráfica que difiere de las demás es la varianza y esto resulta, como dato adicional al momento de usar diferentes reglas el comportamiento de esta difiere e incluso en ocasiones llega a ser similar con las otras 3. Como nota adicional mencionar que a cada gráfica le podemos incrementar el tamaño de la gráfica para poder visualizar de una mejor visualización de los datos, lo anterior se realiza exactamente igual que a como se menciono unas hojas atrás.\par
-		Adicionalmente a lo anterior, la barra de opciones que tiene cada gráfica nos permite realizar diferentes cosas que en seguida enlistaremos, para comodidad tomar como referencia la figura 12 y ver los iconos de izquierda a derecha.
-		\begin{enumerate}
-		  \item El icono de la casa nos permite reajustar la vista de nuestra gráfica a como lo era originalmente.
-		  \item El icono de la flecha a la izquierda o derecha nos permite navegar entre las distintas vistas que hayamos realizado en una gráfica, es decir, si hicimos dos aumentos y queremos regresar al primero hacemos de la flecha hacia la izquierda y en caso de que estando en el primer aumento queremos regresar al segundo hacemos uso de la flecha a la derecha.
-		  \item El icono que nos recuerda a una cruz nos permite mover la gráfica a voluntad, un ejemplo de uso seria que al hacer zoom en un área y querer mover ese mismo zoom en un área que tenemos a lado hacemos uso de esta función para poder mover nuestra gráfica.
-		  \item El icono de la lupa como ya se ha mencionado nos permite aumentar el tamaño de cierta área en nuestra gráfica.
-		  \item El icono que nos recuerda a configuración no recomiendo usarlo ya que cambia la configuración inicial de nuestra gráfica y en ocasiones nos arruina el como se ve la gráfica
-		  \item El ultimo icono, que es el icono de disquete nos permite, como es incluso lógico, guardar la gráfica como una imagen con varias extensiones a elegir, esto nos permite poder guardar resultados como una imagen para el posterior uso.
+	Para el desarrollo de esta parte se uso Python como lenguaje de programación, los atractores son guardados en carpetas con el nombre de regla, así también, el nombre del archivo que se genera se guarda con el siguiente formato: atractor\_'numero de la regla'\_size\_'longitud'.graphml, para poder visualizar los resultados se necesita de un programa capas de abrir archivos con formato .graphml, hay varias opciones gratis para diferentes sistemas operativos, las mas conocidas son las siguientes:
+		\begin{enumerate}    
+  			\item Windows
+  				\begin{enumerate}
+    				\item Gephi. Gratuito
+    				\item yWorks yEd Graph Editor. Gratuito
+    				\item Cytoscape. Gratuito
+    			\end{enumerate}
+  			\item MacOS
+  				\begin{enumerate}
+    				\item Gephi. Gratuito
+    				\item yWorks yEd Graph Editor. Gratuito
+    			\end{enumerate}
+  			\item Linux
+  				\begin{enumerate}
+    				\item Gephi. Gratuito
+    				\item yWorks yEd Graph Editor. Gratuito
+    			\end{enumerate}
 		\end{enumerate}
-		\begin{figure}[H]
+		Esto con el fin de proporcionar la capacidad de modificar las formas de los nodos, los vértices, colores, forma de organización entre algunas otras opciones mas. En nuestro caso se uso el programa Cytoscape el cual nos proporciona las características anteriormente mencionadas y algunas otras metras. Empecemos así con los atractores.
+		\subsection{Regla 22}
+		El formato sera el siguiente, primero se pondrá la imagen del atractor y después evoluciones de los nodos para ver los atractores que existen.
+			\subsubsection{Tamaño 2}
+			\begin{figure}[H]
 			\centering
-			\includegraphics[scale=1]{resources/barra.png}
-			\caption{Barra de opciones}\label{fig:picture}
-		\end{figure}
-		\newpage
-		\subsection{Código}
-	A continuación se anexa el código generado para la creación de este primer programa. Primero
-tenemos la parte de la interfaz de nuestro programa que se crea con el siguiente código.
+			\includegraphics[scale=0.08]{resources/Atractores22/atractor_22_size_2.png}
+			\caption{Atractor de tamaño 2.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.5]{resources/Atractores22/atractor_22_size_2_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que en la imagen 27 y durante algunos tamaños las evoluciones serán acomodadas tal que del lado izquierdo se tenga el nodo de menor numero al mayor, ya que si lo hicieramos por cada nodo simplemente no acabaríamos, mencionar que para este atractor no vemos el caso del nodo 0 ya que el nodo 3 al dirigirse al nodo 0 entra en un ciclo en donde vemos el comportamiento del nodo 0.
+			\subsubsection{Tamaño 3}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_3.png}
+			\caption{Atractor de tamaño 3.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_3_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_3_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que para este atractor no vemos el caso del nodo 0 ya que el nodo 7, 3, 5, 6 se dirigen al nodo 0 el cual entra en un ciclo en donde vemos el comportamiento del nodo 0.
+			\subsubsection{Tamaño 4}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_4.png}
+			\caption{Atractor de tamaño 4.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_4_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_4_res1.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_4_res2.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que para este atractor no vemos el caso del nodo 0, 13, 14, 7, 12 y 9 ya se pueden ver sus evoluciones por medio de otros nodos, por ejemplo, para ver la evolución del nodo 12 hacemos uso del nodo 3 ya que es un ciclo entre ambos, en el caso del nodo 9 y 6 ocurre lo mismo, mientras que los nodos 8, 4, 1, 2 y 15 acceden al nodo 0, los 4 primeros pasan por otros nodos, los cuales son 13, 14, 11 y 7 respectivamente.
+			\subsubsection{Tamaño 5}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_5.png}
+			\caption{Atractor de tamaño 5.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_5_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_5_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que para este atractor solamente vemos la evolución de los nodos 11, 22, 31, 21, 13 y 26, ya que son los nodos del exterior y estos pasan por los demás nodos y podemos ver como funciona el atractor el cual es el nodo 0.
+			\subsubsection{Tamaño 6}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_6.png}
+			\caption{Atractor de tamaño 6.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_6_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_6_res2.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_6_res5.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_6_res9.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que a partir de este atractor solamente tomaremos unos cuantos nodos de prueba ya que abarcar la mayoría tomaría mucho espacio del reporte.
+			\subsubsection{Tamaño 7}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_7.png}
+			\caption{Atractor de tamaño 7.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_7_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_7_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Los nodos de prueba fueron 104, 44, 99 y 73, ya que empezamos a ver un patron repetitivo de tener nodos que se dirigen directamente al atractor y algunos nodos que forman ciclos con otros nodos.
+			\subsubsection{Tamaño 8}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_8.png}
+			\caption{Atractor de tamaño 8.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_8_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_8_res1.png}
+			\caption{Evoluciones de algunos atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 9}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_9.png}
+			\caption{Atractor de tamaño 9.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_9_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_9_res1.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_9_res2.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 10}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_10.png}
+			\caption{Atractor de tamaño 10.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_10_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_10_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 11}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_11.png}
+			\caption{Atractor de tamaño 11.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_11_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_11_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 12}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_12.png}
+			\caption{Atractor de tamaño 12.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_12_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_12_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 13}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.15]{resources/Atractores22/atractor_22_size_13.png}
+			\caption{Atractor de tamaño 13.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_13_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_13_res1.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_13_res2.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 14}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores22/atractor_22_size_14.png}
+			\caption{Atractor de tamaño 14.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_14_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_14_res1.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_14_res2.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 15}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.8]{resources/Atractores22/atractor_22_size_15.png}
+			\caption{Atractor de tamaño 15.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_15_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_15_res1.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_15_res2.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 16}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.8]{resources/Atractores22/atractor_22_size_16.png}
+			\caption{Atractor de tamaño 16.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_16_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_16_res1.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_16_res2.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 17}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.7]{resources/Atractores22/atractor_22_size_17.png}
+			\caption{Atractor de tamaño 17.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_17_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_17_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 18}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.7]{resources/Atractores22/atractor_22_size_18.png}
+			\caption{Atractor de tamaño 18.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_18_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_18_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Este fue el ultimo atractor que fue capaz de construir nuestro programa, sin embargo, mediante el uso de JetBrains Datalore, el cual nos sirve como una maquina externa que nos da mas poder de computo pudimos calcular hasta el tamaño 25, esto solo es guardado como archivos .txt que contienen los nodos y sus atractor correspondiente.
+			\subsubsection{Tamaño 19}
+			Para estos tamaños en donde solamente calculamos los atractores pero no calculamos la gráfica debido a que el incremento de nodos y por lo tanto del archivo es demasiado grande, solo mencionar que el archivo mas grande obtenido pesa medio Gb. Solo dos capturas de pantalla, el principio y el fin y algunas evoluciones con valores tomados aleatoriamente.
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_19.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_191.png}
+			\caption{Atractor de tamaño 19.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_19_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 20}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_20.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_201.png}
+			\caption{Atractor de tamaño 20.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_20_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 21}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_21.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_211.png}
+			\caption{Atractor de tamaño 21.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_21_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 22}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_22.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_221.png}
+			\caption{Atractor de tamaño 22.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_22_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 23}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_23.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_231.png}
+			\caption{Atractor de tamaño 23.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_23_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 24}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_24.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_241.png}
+			\caption{Atractor de tamaño 24.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_24_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 25}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_25.png}
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_251.png}
+			\caption{Atractor de tamaño 25.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores22/atractor_22_size_25_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+		\subsection{Regla 54}
+		El formato sera el siguiente, primero se pondrá la imagen del atractor y después evoluciones de los nodos para ver los atractores que existen.
+			\subsubsection{Tamaño 2}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.05]{resources/Atractores54/atractor_54_size_2.png}
+			\caption{Atractor de tamaño 2.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.5]{resources/Atractores54/atractor_54_size_2_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que en la imagen 57 y durante algunos tamaños las evoluciones serán acomodadas tal que del lado izquierdo se tenga el nodo de menor numero al mayor, ya que si lo hicieramos por cada nodo simplemente no acabaríamos, mencionar que para este atractor no vemos el caso del nodo 0 ya que el nodo 3 al dirigirse al nodo 0 entra en un ciclo en donde vemos el comportamiento del nodo 0.
+			\subsubsection{Tamaño 3}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.08]{resources/Atractores54/atractor_54_size_3.png}
+			\caption{Atractor de tamaño 3.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.4]{resources/Atractores54/atractor_54_size_3_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que para este atractor no vemos el caso del nodo 0, 1, 2,4 y ya que los nodos 5, 6, 3 pasan por los nodos anteriormente mencionados y ver sus evoluciones es innecesario ya que las podemos apreciar por medio de las evoluciones de los nodos seleccionados.
+			
+			\subsubsection{Tamaño 4}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.08]{resources/Atractores54/atractor_54_size_4.png}
+			\caption{Atractor de tamaño 4.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_4_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_4_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que para este atractor no vemos el caso de los nodos 0, 15, 14, 4, 11, 7, 8, 13, 3 y 9 ya se pueden ver sus evoluciones por medio de otros nodos, por ejemplo, para ver la evolución del nodo 3 hacemos uso del nodo 12 ya que es un ciclo entre ambos, en el caso del nodo 9 y 6 ocurre lo mismo, mientras que los nodos 14, 4 y 11 forman un ciclo junto con el nodo l, los nodos 7, 8 y 13 junto con el nodo 2 forman otro ciclo y el nodo 0 es accesible por el nodo 15 el cual a su vez es accesible por el nodo 10 y 5.
+				
+			\subsubsection{Tamaño 5}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores54/atractor_54_size_5.png}
+			\caption{Atractor de tamaño 5.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_5_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_5_res1.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_5_res2.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_5_res3.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que para este atractor solamente vemos la evolución de los nodos13, 30, 26, 29, 23, 11, 27, 21, 22 y 154 ya que son los nodos del exterior y estos pasan por los demás nodos y podemos ver como funciona el atractor el cual es el nodo 0.
+			\subsubsection{Tamaño 6}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores54/atractor_54_size_6.png}
+			\caption{Atractor de tamaño 6.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_6_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_6_res1.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_6_res2.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Mencionar que a partir de este atractor solamente tomaremos unos cuantos nodos de prueba ya que abarcar la mayoría tomaría mucho espacio del reporte.
+				
+			\subsubsection{Tamaño 7}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores54/atractor_54_size_7.png}
+			\caption{Atractor de tamaño 7.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_7_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_7_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Los nodos de prueba fueron nodos de cada uno de los atractores que podemos ver, se utilizo el mas lejano de cada atractor, esto con el fin de poder visualizar como se entra en el atractor con la simulación en nuestro primer programa.
+			\subsubsection{Tamaño 8}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores54/atractor_54_size_8.png}
+			\caption{Atractor de tamaño 8.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_8_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_8_res1.png}
+			\caption{Evoluciones de algunos atractores.}\label{fig:picture}
+			\end{figure}	
+			\subsubsection{Tamaño 9}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores54/atractor_54_size_9.png}
+			\caption{Atractor de tamaño 9.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_9_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_9_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 10}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores54/atractor_54_size_10.png}
+			\caption{Atractor de tamaño 10.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_10_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_10_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 11}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores54/atractor_54_size_11.png}
+			\caption{Atractor de tamaño 11.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_11_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_11_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 12}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores54/atractor_54_size_12.png}
+			\caption{Atractor de tamaño 12.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_12_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_12_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 13}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.15]{resources/Atractores54/atractor_54_size_13.png}
+			\caption{Atractor de tamaño 13.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_13_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_13_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 14}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.1]{resources/Atractores54/atractor_54_size_14.png}
+			\caption{Atractor de tamaño 14.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_14_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_14_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 15}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.8]{resources/Atractores54/atractor_54_size_15.png}
+			\caption{Atractor de tamaño 15.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_15_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_15_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 16}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.8]{resources/Atractores54/atractor_54_size_16.png}
+			\caption{Atractor de tamaño 16.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_16_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_16_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 17}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.8]{resources/Atractores54/atractor_54_size_17.png}
+			\caption{Atractor de tamaño 17.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_17_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_17_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 18}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.8]{resources/Atractores54/atractor_54_size_18.png}
+			\caption{Atractor de tamaño 18.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_18_res.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_18_res1.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			Este fue el ultimo atractor que fue capaz de construir nuestro programa, sin embargo, mediante el uso de JetBrains Datalore, el cual nos sirve como una maquina externa que nos da mas poder de computo pudimos calcular hasta el tamaño 25, esto solo es guardado como archivos .txt que contienen los nodos y sus atractor correspondiente.
+			\subsubsection{Tamaño 19}
+			Para estos tamaños en donde solamente calculamos los atractores pero no calculamos la gráfica debido a que el incremento de nodos y por lo tanto del archivo es demasiado grande, solo mencionar que el archivo mas grande obtenido pesa medio Gb. Solo dos capturas de pantalla, el principio y el fin y algunas evoluciones con valores tomados aleatoriamente.
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_19.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_191.png}
+			\caption{Atractor de tamaño 19.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_19_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 20}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_20.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_201.png}
+			\caption{Atractor de tamaño 20.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_20_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 21}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_21.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_211.png}
+			\caption{Atractor de tamaño 21.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_21_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 22}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_22.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_221.png}
+			\caption{Atractor de tamaño 22.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_22_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 23}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_23.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_231.png}
+			\caption{Atractor de tamaño 23.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_23_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 24}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_24.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_241.png}
+			\caption{Atractor de tamaño 24.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_24_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+			\subsubsection{Tamaño 25}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_25.png}
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_251.png}
+			\caption{Atractor de tamaño 25.}\label{fig:picture}
+			\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.3]{resources/Atractores54/atractor_54_size_25_res.png}
+			\caption{Evoluciones de los atractores.}\label{fig:picture}
+			\end{figure}
+	\section{Código}	
+	A continuación se anexa el código creado para la parte de la generación de expresiones regulares de forma aleatoria dada una longitud de cadena.
+\lstinputlisting[language=Python]{RegExGenerator.py}
 \par
-	Por ultimo tenemos el código que nos proporciona la parte lógica del programa y que ademas es el encargado de hacer las gráficas, este código es el cerebro de nuestro programa.
-
+	Tenemos un código actualizado para la lógica del programa el cual nos permite poder crear autómatas celulares de un tamaño de 30 mil células por 30 mil pasos en 1 minuto, esto sin la opción de animación, la cual es una característica nueva también, así como la lógica para el calculo de la entropia de Shannon y la densidad de la columna central.
+\lstinputlisting[language=Python]{Logica.py}
+\par
+	También la parte del código de la interfaz sufrió un cambio y es que ahora tenemos la opción de animar el autómata y detener dicha animación cuando nos plazca, aunado a eso tenemos la opción de hacer uso de la expresión regular para la regla 22 y 54.
+\lstinputlisting[language=Python]{Interfaz.py}
+\par
+	Código para el calculo de atractores, modificado talque la longitud máxima menos 1 para poder visualizar la información en formato de imagen, ademas de ordenarla por medio de carpetas y con su tamaño correspondiente.
+\lstinputlisting[language=Python]{CalculadoraAtractores.py}
+\par
+	Código para el calculo de atractores mediante el uso de Datalore y guardando en un archivo .txt con el nodo inicial del lado izquierdo y el nodo final del lado derecho.
+\lstinputlisting[language=Python]{CalculadoraAtractores _texto.py}
+\par
 	\section{Conclusiones}
-	Esta programa es bastante interesante, ya que es increíble ver al cambiar los valores de las células de nuestra iteración cero cambia por mucho el comportamiento de nuestro ECA que se podria pensar que no es tan significativo pero eso es un pensamiento errado ya que vemos 	que cambia demasiado, podríamos llegar a decir que una célula de mas o de menos provoca un caos en nuestro ECA y por tanto un ECA diferente cada vez que cambiemos nuestra iteración inicial. Finalmente solo me queda comentar que al haber ya probado diferentes reglas con la misma iteración inicial el resultado es muy diferente con cada regla.
-	\begin{thebibliography}{1}
- \bibitem[label1]{cite_key1} Weisstein, E., 2021. Elementary Cellular Automaton - from Wolfram MathWorld. [online] Mathworld.wolfram.com. Available at: https://mathworld.wolfram.com/ElementaryCellularAutomaton.html [Accessed 15 March 2021].	
- \bibitem[label2]{cite_key2} Lees, E., 2020. Elementary Cellular Automata · Matplotblog. [online] Matplotlib.org. Available at: https://matplotlib.org/matplotblog/posts/elementary-cellular-automata/ [Accessed 15 March 2021].
-  \bibitem[label3]{cite_key3} Caparrini, F., 2016. Autómatas Celulares - Fernando Sancho Caparrini. [online] Cs.us.es. Available at: \url{http://www.cs.us.es/~fsancho/?e=66} [Accessed 15 March 2021].
+	Sin duda una practica sumamente interesante, ya que no solo vimos como controlar de una manera a nuestros autómatas con determinadas reglas mediante las expresiones regulares y como estas nos generan patrones compartidos entre autómatas, pero sin duda alguna lo mas interesante y complicado fue el calculo de los atractores ya que estamos hablando de estos creces exponencialmente, tan solo para el tamaño 18 el numero total de nodos es de 262144 y ni hablar de tamaños superiores, en lo personal fue complicado ya que mi equipo no es el mejor ni el mas nuevo y eso se ve reflejado en el tamaño que puede manejar, pero mediante la ayuda de servicios como Datalore nos aumenta la potencia de computo, pero aun así me enfrente al problema de gastar toda la RAM inclusive en la versión de paga, que por cierto no es barata, llegue a calcular el tamaño 25 en el cual estamos hablando de 33554432 nodos, generando un archivo de medio Gb, algo realmente impresionante y sin duda interesante, en especial me pude percatar que para la regla 22 el atractor principal era el nodo 0 mientras que para la regla 54 no contaba con uno principal, tenia varios, esto nos ocasiona observar atractores de diferentes formas.
+	
+\begin{thebibliography}{1}
+ \bibitem[label1]{cite_key1} The Global Dynamics of Cellular Automata; An Atlas of Basin of Attraction Fields of One-Dimensional Cellular Automata. Addison-Wesley, 1992. 
+
+ \bibitem[label2]{cite_key2} Simple networks on complex cellular automata: From de Bruijn diagrams to jump-graphs. In: Swarm Dynamics as a Complex Network, Springer, (I. Zelinka and G. Chen Eds.), chapter 12, pages 241-264, 2018.
 \end{thebibliography}
 
 \end{document}

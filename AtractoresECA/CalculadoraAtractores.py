@@ -59,7 +59,7 @@ def main():
     carpeta_54 = "Atractores_regla_54"
     crear_carpetas(carpeta_22)
     crear_carpetas(carpeta_54)
-    longitud_max = 31
+    longitud_max = 20
     regla_22 = regla_representacion(22)
     regla_54 = regla_representacion(54)
     t0 = time.time()
@@ -69,19 +69,20 @@ def main():
         atractoresList_54 = []
         for inicial in combinaciones:
             atractores_22 = AutomataCelular(inicial, regla_22)
-            atractoresList_22.append((ListaBinariatoNumero(
-                atractores_22[0]), ListaBinariatoNumero(atractores_22[-1])))
+            atractoresList_22.append((ListaBinariatoNumero(atractores_22[-1]),ListaBinariatoNumero(
+                atractores_22[0])))
             atractores_54 = AutomataCelular(inicial, regla_54)
-            atractoresList_54.append((ListaBinariatoNumero(
-                atractores_54[0]), ListaBinariatoNumero(atractores_54[-1])))
-
+            atractoresList_54.append((ListaBinariatoNumero(atractores_54[-1]),ListaBinariatoNumero(
+                atractores_54[0])))
         atractor_22_nombre = os.path.join(
             carpeta_22, 'atractor_22_size_'+str(longitud)+'.graphml')
         atractor_54_nombre = os.path.join(
             carpeta_54, 'atractor_54_size_'+str(longitud)+'.graphml')
-        g_22 = nx.MultiGraph(atractoresList_22)
+        g_22 = nx.MultiGraph()
+        g_22.add_edges_from(atractoresList_22)
         nx.write_graphml(g_22, atractor_22_nombre)
-        g_54 = nx.MultiGraph(atractoresList_54)
+        g_54 = nx.MultiGraph()
+        g_54.add_edges_from(atractoresList_54)
         nx.write_graphml(g_54, atractor_54_nombre)
     t1 = time.time()
     total = t1-t0
