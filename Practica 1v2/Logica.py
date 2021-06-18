@@ -320,8 +320,10 @@ def IniciarRandom(Color0, Color1, Pasos, Regla, TamanioAutomata, isAnimado):
 
 def IniciarEspecifico(Color0, Color1, Pasos, Regla, TamanioAutomata, LugaresUnos, isAnimado):
     CelulasIniciales = np.zeros((TamanioAutomata,), dtype=int)
-    for i in LugaresUnos:
-        CelulasIniciales[i] = 1
+    ########################
+    reglaString = np.binary_repr(LugaresUnos[0], width=TamanioAutomata)
+    CelulasIniciales = np.array([int(bit) for bit in reglaString]).astype(np.int8)
+    ########################
     cmap = colors.ListedColormap([Color0, Color1])  # 0,1
     GenerarAutomataCelular(CelulasIniciales, Pasos, Regla, cmap, isAnimado)
     if(isAnimado == 0):

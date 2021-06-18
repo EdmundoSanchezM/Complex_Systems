@@ -96,7 +96,9 @@ def stopcontAnim():
         cellularAutomaton.anim_densidad_central.event_source.start()
 
 def deletePlt():
+    global arregloInicial
     plt.close("all")
+    arregloInicial = []
     
 def iniciar():
     global arregloInicial
